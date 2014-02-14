@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+# convert "Bridge [transport] IP:ORPort [fingerprint]" lines
+# to "IP ORPort" lines for corridor-helper-update
+while read -r _1 _2 _3 _4; do
+	for x in $_2 $_3; do
+		case "$x" in *:*)
+			echo ${x%:*} ${x#*:}
+		esac
+	done
+done | corridor-helper-update

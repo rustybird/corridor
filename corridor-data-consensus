@@ -1,0 +1,59 @@
+#!/bin/sh -e
+
+receive() {
+	while :; do
+		socat "$CTRL",crnl -,ignoreeof <<-END
+			AUTHENTICATE `auth`
+			GETINFO ns/all
+			SETEVENTS NEWCONSENSUS
+		END
+		sleep 1
+	done
+}
+
+process() {
+	while read -r _0 _1 _2 _3 _4 _5 _6 _7 _8; do
+		case "$_0" in
+		[26]50+*)
+			echo Processing router list...
+			RELAYS=
+		;;
+
+		r)
+			for PORT in "$_7" "$_8"; do
+				test "$PORT" = 0 || RELAYS="$RELAYS
+$_6 $PORT"
+			done
+		;;
+
+		.)
+			corridor-helper-update <<-END
+				${RELAYS#?}
+			END
+		;;
+
+		5*)
+			echo $_0 $_1 $_2 $_3 $_4 $_5 $_6 $_7 $_8
+			exit 1
+		;;
+		esac
+	done >&2
+}
+
+setup() {
+	if test -n "$TOR_CONTROL_SOCKET"; then
+		CTRL=UNIX-CONNECT:$TOR_CONTROL_SOCKET
+	else
+		CTRL=TCP:${TOR_CONTROL_HOST-localhost}:${TOR_CONTROL_PORT-9051}
+	fi
+
+	if test -n "$TOR_CONTROL_COOKIE_AUTH_FILE"; then
+		hex()  { perl -ne "print unpack '(H2)*'"; }
+		auth() { hex <"$TOR_CONTROL_COOKIE_AUTH_FILE"; }
+	else
+		auth() { echo "\"$TOR_CONTROL_PASSWD\""; }
+	fi
+}
+
+setup
+receive | process

@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+IPSET=tor_relays
+TMP=$IPSET.tmp
+TYPE="hash:ip,port hashsize 64"
+
+{
+	echo create $IPSET $TYPE -exist
+	echo create $TMP   $TYPE -exist
+	echo flush  $TMP
+	sort -u | grep -Ex "([0-9]+\.){3}[0-9]+ [0-9]+" | sed -e "s/ /,/" -e "s/^/add $TMP /"
+	echo swap $TMP $IPSET
+	echo destroy $TMP
+} | ipset restore >&2
+
+echo $IPSET
+echo ipset updated. >&2
