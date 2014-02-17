@@ -20,10 +20,8 @@ process() {
 		;;
 
 		r)
-			for PORT in "$_7" "$_8"; do
-				test "$PORT" = 0 || RELAYS="$RELAYS
-$_6 $PORT"
-			done
+			RELAYS="$RELAYS
+$_6 $_7"
 		;;
 
 		.)
