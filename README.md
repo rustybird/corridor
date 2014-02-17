@@ -8,7 +8,7 @@ There are several transparently torifying gateways. They suffer from the same pr
 - Any garbage software can pump identifiers into "anonymous" circuits, and get itself exploited by malicious exit nodes.
 - Trust is centralized to the gateway, which is bad enough when used by one person, and just inappropriate when shared with strangers.
 
-**corridor takes a different approach. It allows only connections to Tor relays to pass through (no clearnet leaks!), but client computers are themselves responsible for torifying their own traffic.**
+**corridor takes a different approach. It allows only connections to Tor relays to pass through (no clearnet leaks!), but client computers are themselves responsible for torifying their own traffic.** In other words, it is a filtering gateway, not a proxying gateway.
 
 You can think of it as defense in depth for your vanilla TBB or Tails, for your beautiful scary experimental Qubes proxying schemes, etc. Or invite the hood to use your WiFi without getting into trouble. Connections *between* client computers are blocked by default.
 
@@ -31,7 +31,7 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 
 ## Pitfalls
 
-**To be secure, your new gateway needs two separate network interfaces**, like two Ethernet NICs, or one WiFi radio and one DSL modem. One is to receive incoming traffic from client computers, the other one is to pass the filtered traffic towards the global internet, **and they need to be on different networks**: Clients must not be able to take a shortcut via DHCP, DNS, ICMP Redirect requests, and who knows what else.
+**To be secure, corridor needs two separate network interfaces**, like two Ethernet NICs, or one WiFi radio and one DSL modem. One is to receive incoming traffic from client computers, the other one is to pass the filtered traffic towards the global internet, **and they need to be on different network address spaces**: Clients must not be able to take a shortcut via DHCP, DNS, ICMP Redirect requests, and who knows what else.
 
 
 ## Dependencies so far
