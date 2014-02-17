@@ -13,6 +13,8 @@ receive() {
 
 process() {
 	while read -r _0 _1 _2 _3 _4 _5 _6 _7 _8; do
+		LINE="$_0 $_1 $_2 $_3 $_4 $_5 $_6 $_7 $_8"
+
 		case "$_0" in
 		[26]50+*)
 			echo Processing router list...
@@ -31,7 +33,7 @@ $_6 $_7"
 		;;
 
 		5*)
-			echo $_0 $_1 $_2 $_3 $_4 $_5 $_6 $_7 $_8
+			echo "$LINE"
 			exit 1
 		;;
 		esac
