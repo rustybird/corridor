@@ -22,8 +22,17 @@ process() {
 		;;
 
 		r)
-			RELAYS="$RELAYS
-$_6 $_7"
+			IP=$_6
+			ORPORT=$_7
+		;;
+
+		s)
+			case         "$LINE " in *" Valid "*)
+				case "$LINE " in *" Guard "* | *" Authority "*)
+					RELAYS="$RELAYS
+$IP $ORPORT"
+				esac
+			esac
 		;;
 
 		.)
