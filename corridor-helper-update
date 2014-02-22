@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-IPSET=tor_relays
+IPSET=corridor_relays
 TMP=$IPSET.tmp
 TYPE="hash:ip,port hashsize 64"
 

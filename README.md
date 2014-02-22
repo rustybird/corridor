@@ -16,7 +16,7 @@ You can think of it as defense in depth for your vanilla TBB or Tails, for your 
 ## Principle of operation
 
 1. Either run the corridor-data-consensus daemon script, which opens a Tor control connection and subscribes to NEWCONSENSUS events (announcements listing all public relays), or pipe any number of "Bridge" lines into corridor-data-bridges.
-2. That data gets sent to corridor-helper-update, which atomically updates a Linux ipset (a list of IP-address:TCP-port entries accessible in constant time) named tor_relays containing all Valid Guard or Authority relays along with their ORPort.
+2. That data gets sent to corridor-helper-update, which atomically updates a Linux ipset (a list of IP-address:TCP-port entries accessible in constant time) named corridor_relays containing all Valid Guard or Authority relays along with their ORPort.
 3. An iptables rule in corridor-forward refuses to forward packets unless they are going to / coming from one of the relays inside the ipset. If you pass corridor-forward the network address range you are offering to clients (e.g. 10.0.0.0/8) as an argument, it will also setup an iptables MASQUERADE rule for you.
 
 
