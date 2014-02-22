@@ -1,4 +1,4 @@
-**This is a very early release. HERE BE DRAGONS! Not affiliated with the Tor Project.**
+**This is an early release. HERE BE DRAGONS? Not affiliated with the Tor Project.**
 
 # corridor, a Tor traffic whitelisting gateway
 
