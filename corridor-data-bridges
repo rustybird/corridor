@@ -3,9 +3,11 @@
 # convert "Bridge [transport] IP:ORPort [fingerprint]" lines
 # to "IP ORPort" lines for corridor-ipset-relays
 while read -r _1 _2 _3 _4; do
-	for x in $_2 $_3; do
-		case "$x" in *:*)
-			echo ${x%:*},${x#*:}
-		esac
-	done
+	if test "$_1" = Bridge; then
+		for x in $_2 $_3; do
+			case "$x" in *:*)
+				echo ${x%:*},${x#*:}
+			esac
+		done
+	fi
 done | corridor-ipset-relays
