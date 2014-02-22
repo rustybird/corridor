@@ -8,7 +8,7 @@ TYPE="hash:ip,port hashsize 64"
 	echo create $IPSET $TYPE -exist
 	echo create $TMP   $TYPE -exist
 	echo flush  $TMP
-	sort -u | grep -Ex "([0-9]+\.){3}[0-9]+ [0-9]+" | sed -e "s/ /,/" -e "s/^/add $TMP /"
+	grep -Ex "([0-9]+\.){3}[0-9]+ [0-9]+" | sed -e "s/ /,/" -e "s/^/add $TMP /"
 	echo swap $TMP $IPSET
 	echo destroy $TMP
 } | ipset restore >&2
