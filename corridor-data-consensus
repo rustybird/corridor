@@ -36,7 +36,7 @@ $IP,$ORPORT"
 		;;
 
 		.)
-			corridor-helper-update <<-END
+			corridor-ipset-relays <<-END
 				${RELAYS#?}
 			END
 		;;

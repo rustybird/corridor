@@ -5,9 +5,9 @@ ${1+iptables -t nat -I POSTROUTING -s "$1" ! -d "$1" -j MASQUERADE}
 
 # Don't forward IPv4 traffic unless it comes back from, or goes out to,
 # a relay IP:port
-IPSET=`corridor-helper-update </dev/null`
+corridor-ipset-relays </dev/null
 iptables -I FORWARD -m conntrack ! --ctstate ESTABLISHED,RELATED \
-                    -m set       ! --match-set "$IPSET" dst,dst  \
+                    -m set       ! --match-set corridor_relays dst,dst \
 		    -j REJECT --reject-with icmp-host-prohibited
 
 # Enable IPv4 forwarding in general

@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+grep -Ex "([0-9]+\.){3}[0-9]+,[0-9]+" |
+corridor-ipset "${0##*-}" hash:ip,port hashsize 64

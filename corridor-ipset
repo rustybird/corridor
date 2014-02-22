@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+IPSET=corridor_${1?}
+TMP=$IPSET.tmp
+shift
+
+{
+	echo create $IPSET "$@" -exist
+	echo create $TMP   "$@" -exist
+	echo flush  $TMP
+	sed "s/^/add $TMP /"
+	echo swap $TMP $IPSET
+	echo destroy $TMP
+} | ipset restore >&2
+
+echo $IPSET updated. >&2
