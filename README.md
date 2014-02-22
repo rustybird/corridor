@@ -20,15 +20,6 @@ You can think of it as defense in depth for your vanilla TBB or Tails, for your 
 3. An iptables rule refuses to forward packets unless they are going to / coming from one of the relays inside the ipset.
 
 
-## How does corridor-data-consensus open a Tor control connection?
-
-If $TOR_CONTROL_SOCKET is nonempty (e.g. /var/run/tor/control), use it.
-Otherwise, connect to $TOR_CONTROL_HOST (defaults to localhost) on port $TOR_CONTROL_PORT (defaults to 9051).
-
-If $TOR_CONTROL_COOKIE_AUTH_FILE is nonempty (e.g. /var/run/tor/control.authcookie), use it.
-Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
-
-
 ## Pitfalls
 
 - **To be secure, corridor needs two separate network interfaces**, like two Ethernet NICs, or one WiFi radio and one DSL modem. One is to receive incoming traffic from client computers, the other one is to pass the filtered traffic towards the global internet, **and they need to be on different network address spaces**: Clients must not be able to take a shortcut via DHCP, DNS, ICMP Redirect requests, and who knows what else.
@@ -64,6 +55,15 @@ corridor-data-bridges <<-END
 	...
 END
 ```
+
+
+## How does corridor-data-consensus open a Tor control connection?
+
+If $TOR_CONTROL_SOCKET is nonempty (e.g. /var/run/tor/control), use it.
+Otherwise, connect to $TOR_CONTROL_HOST (defaults to localhost) on port $TOR_CONTROL_PORT (defaults to 9051).
+
+If $TOR_CONTROL_COOKIE_AUTH_FILE is nonempty (e.g. /var/run/tor/control.authcookie), use it.
+Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 
 
 ## Dependencies so far
