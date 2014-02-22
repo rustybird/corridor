@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+while read PRIV; do
+	iptables -t nat -I POSTROUTING -s "$PRIV" ! -d "$PRIV" -j MASQUERADE
+done

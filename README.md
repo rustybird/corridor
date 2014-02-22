@@ -16,8 +16,8 @@ You can think of it as defense in depth for your vanilla TBB or Tails, for your 
 ## Principle of operation
 
 1. Either run the corridor-data-consensus daemon script, which opens a Tor control connection and subscribes to NEWCONSENSUS events (announcements listing all public relays), or pipe any number of "Bridge" lines into corridor-data-bridges.
-2. That data gets sent to corridor-ipset-relays, which atomically updates a Linux ipset (a list of IP-address:TCP-port entries accessible in constant time) named corridor_relays containing all Valid Guard or Authority relays along with their ORPort.
-3. An iptables rule in corridor-forward refuses to forward packets unless they are going to / coming from one of the relays inside the ipset. If you pass corridor-forward the network address range you are offering to clients (e.g. 10.0.0.0/8) as an argument, it will also setup an iptables MASQUERADE rule for you.
+2. That data is used to atomically update a Linux ipset (a list of IP-address:TCP-port entries accessible in constant time) named corridor_relays containing all Valid Guard or Authority relays along with their ORPort.
+3. An iptables rule refuses to forward packets unless they are going to / coming from one of the relays inside the ipset.
 
 
 ## How does corridor-data-consensus open a Tor control connection?
@@ -36,6 +36,35 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 - corridor cannot prevent **malware** on a client computer from **directly contacting a colluding relay to find out your clearnet IP address**. The part of your client system that can open outside TCP connections must be in a trustworthy state! (Whonix and Qubes-TorVM are well-designed in this respect.) Discussion:
 	- https://lists.torproject.org/pipermail/tor-talk/2014-February/032153.html
 	- https://lists.torproject.org/pipermail/tor-talk/2014-February/032163.html
+
+
+## Example usage
+
+```
+export PATH="$PATH:/path/to/corridor"
+
+# Set up the iptables filter rule.
+corridor-init-filter
+
+# Enable IPv4 forwarding, disable IPv6 forwarding.
+corridor-init-forward
+
+# Set up Source NAT with iptables.
+corridor-init-snat <<-END
+	10.0.0.0/8
+END
+
+# Start the daemon that keeps track of public Tor relays.
+TOR_CONTROL_COOKIE_AUTH_FILE=/var/run/tor/control.authcookie \
+corridor-data-consensus &
+
+# Or use bridges instead.
+corridor-data-bridges <<-END
+	Bridge [transport] IP:ORPort [fingerprint]
+	...
+END
+```
+
 
 ## Dependencies so far
 
