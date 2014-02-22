@@ -17,7 +17,7 @@ You can think of it as defense in depth for your vanilla TBB or Tails, for your 
 
 1. Either run the corridor-data-consensus daemon script, which opens a Tor control connection and subscribes to NEWCONSENSUS events (announcements listing all public relays), or pipe any number of "Bridge" lines into corridor-data-bridges.
 2. That data is used to atomically update a Linux ipset (a list of IP-address:TCP-port entries accessible in constant time) named corridor_relays containing all Valid Guard or Authority relays along with their ORPort.
-3. An iptables rule refuses to forward packets unless they are going to / coming from one of the relays inside the ipset.
+3. iptables rules refuse to forward packets unless they are going to / coming from one of the relays inside the ipset.
 
 
 ## Pitfalls
@@ -34,7 +34,7 @@ You can think of it as defense in depth for your vanilla TBB or Tails, for your 
 ```
 export PATH="$PATH:/path/to/corridor"
 
-# Set up the iptables filter rule.
+# Set up the iptables CORRIDOR chain.
 corridor-init-filter
 
 # Enable IPv4 forwarding, disable IPv6 forwarding.
