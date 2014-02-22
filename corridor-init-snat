@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
-while read PRIV; do
-	iptables -t nat -I POSTROUTING -s "$PRIV" ! -d "$PRIV" -j MASQUERADE
+while read PRIV PUB; do
+	if test -n "$PUB"; then
+		set SNAT --to-source "$PUB"
+	else
+		set MASQUERADE
+	fi
+
+	iptables -t nat -I POSTROUTING -s "$PRIV" ! -d "$PRIV" -j "$@"
 done

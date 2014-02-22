@@ -41,8 +41,10 @@ corridor-init-filter
 corridor-init-forward
 
 # Set up Source NAT with iptables.
+# If a line has a second argument, SNAT --to-source.
+# Otherwise, MASQUERADE.
 corridor-init-snat <<-END
-	10.0.0.0/8
+	10.0.0.0/8 192.168.1.254
 END
 
 # Start the daemon that keeps track of public Tor relays.
