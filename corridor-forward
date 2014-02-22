@@ -5,7 +5,7 @@ ${1+iptables -t nat -I POSTROUTING -s "$1" ! -d "$1" -j MASQUERADE}
 
 # Don't forward IPv4 traffic unless it comes back from, or goes out to,
 # a relay IP:port
-corridor-ipset-relays </dev/null
+corridor-ipset-relays --init
 iptables -I FORWARD -m conntrack ! --ctstate ESTABLISHED,RELATED \
                     -m set       ! --match-set corridor_relays dst,dst \
 		    -j REJECT --reject-with icmp-host-prohibited

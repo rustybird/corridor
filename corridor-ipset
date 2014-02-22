@@ -1,6 +1,14 @@
 #!/bin/sh -e
 
-IPSET=corridor_${1?}
+PREFIX=corridor_
+
+if test "$1" = --init; then
+	shift
+	ipset create "$PREFIX$@" -exist
+	exit
+fi
+
+IPSET=$PREFIX${1?}
 TMP=$IPSET.tmp
 shift
 
