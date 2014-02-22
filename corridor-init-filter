@@ -1,7 +1,8 @@
 #!/bin/sh -e
 
-# Ensure that the ipset to be referenced later exists
+# Ensure that the ipsets to be referenced later exist
 corridor-ipset-relays --init
+corridor-ipset-logged --init
 
 # Build a chain and hook it
 iptables -N CORRIDOR
@@ -10,6 +11,11 @@ iptables -I FORWARD -j CORRIDOR
 # Bail out if this is a connection to a relay
 iptables -A CORRIDOR -m conntrack --ctstate ESTABLISHED,RELATED       -j RETURN
 iptables -A CORRIDOR -m set       --match-set corridor_relays dst,dst -j RETURN
+
+# Unfortunately, logging always includes MAC addresses.
+# --log-macdecode just tells the kernel to use a nicer format.
+iptables -A CORRIDOR -m set --match-set corridor_logged src -j LOG \
+         --log-level warning --log-prefix "corridor: reject " --log-macdecode
 
 # No packet for you
 iptables -A CORRIDOR -j REJECT --reject-with icmp-host-prohibited

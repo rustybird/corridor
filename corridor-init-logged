@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+# Don't spam the log with false positives
+until ipset list corridor_relays | grep -q ,tcp:; do
+	sleep 1
+done
+
+corridor-ipset-logged

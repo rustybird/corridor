@@ -28,6 +28,13 @@ You can think of it as defense in depth for your vanilla TBB or Tails, for your 
 	- https://lists.torproject.org/pipermail/tor-talk/2014-February/032153.html
 	- https://lists.torproject.org/pipermail/tor-talk/2014-February/032163.html
 
+- The optional **logging of prevented leaks has several limitations**:
+	- Consider the role of DNS:
+		- If leaky client software tries connecting to a server by its IP address, you see that in the log.
+		- If it tries resolving a hostname through a hardcoded DNS server, you see a *failed connection to that DNS server* in the log.
+		- If it tries resolving a hostname but the client system does not know any DNS server, *there is no connection* that could be logged.
+	- Clients can spoof their source IP address.
+	- The kernel shows MAC addresses in the log lines, maybe you don't want that.
 
 ## Example usage
 
@@ -56,6 +63,14 @@ corridor-data-bridges <<-END
 	Bridge [transport] IP:ORPort [fingerprint]
 	...
 END
+
+# Log attempted leaks from these clients. (Syntax: ipset(8) hash:net)
+# This command will block until corridor_relays gets populated!
+corridor-init-logged <<-END
+	10.1.0.1-10.1.0.9
+	10.2.0.0/16
+	10.2.0.5 nomatch
+END
 ```
 
 
@@ -76,8 +91,10 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 - perl (to convert control cookies to hex, easily replacable)
 - Linux kernel:
 	- CONFIG_IP_SET_HASH_IPPORT
+	- CONFIG_IP_SET_HASH_NET
 	- CONFIG_IP_NF_TARGET_MASQUERADE
 	- CONFIG_IP_NF_TARGET_REJECT
+	- CONFIG_NETFILTER_XT_TARGET_LOG
 	- CONFIG_NF_CONNTRACK_IPV4
 
 
