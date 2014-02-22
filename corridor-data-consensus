@@ -30,7 +30,7 @@ process() {
 			case         "$LINE " in *" Valid "*)
 				case "$LINE " in *" Guard "* | *" Authority "*)
 					RELAYS="$RELAYS
-$IP $ORPORT"
+$IP,$ORPORT"
 				esac
 			esac
 		;;
