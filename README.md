@@ -51,7 +51,7 @@ corridor-init-forward
 # If a line has a second argument, SNAT --to-source.
 # Otherwise, MASQUERADE.
 corridor-init-snat <<-END
-	10.0.0.0/8 192.168.1.254
+	10.0.0.0/8 192.168.1.2
 END
 
 # Start the daemon that keeps track of public Tor relays.
