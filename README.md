@@ -10,7 +10,7 @@ There are several transparently torifying gateways. They suffer from the same pr
 
 **corridor takes a different approach. It allows only connections to Tor relays to pass through (no clearnet leaks!), but client computers are themselves responsible for torifying their own traffic.** In other words, it is a filtering gateway, not a proxying gateway.
 
-You can think of it as defense in depth for your vanilla TBB or Tails, for your beautiful scary experimental Qubes proxying schemes, etc. Or invite the hood to use your WiFi without getting into trouble. Connections *between* client computers are blocked by default.
+You can think of it as defense in depth for your vanilla Tor Browser or Tails, for your beautiful scary experimental Qubes proxying schemes, etc. Or invite the hood to use your WiFi without getting into trouble. Connections *between* client computers are blocked by default.
 
 
 ## Principle of operation
@@ -101,7 +101,7 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 ## Todo
 
 - Allow IPv6 connections to Tor relays instead of blocking all IPv6 traffic
-- Build a WiFi/Ethernet portal that allows access to torproject.org so people can download TBB:
+- Build a WiFi/Ethernet portal that allows access to torproject.org so people can download Tor Browser:
 	- Configure hostapd
 	- Configure a DHCP server
 	- DNS recurser restricted to torproject.org (maybe also tails.boum.org, guardianproject.info, f-droid.org)
