@@ -101,12 +101,17 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 ## Todo
 
 - Allow IPv6 connections to Tor relays instead of blocking all IPv6 traffic
-- Build a WiFi/Ethernet portal that allows access to torproject.org so people can download Tor Browser:
-	- Configure hostapd
-	- Configure a DHCP server
-	- DNS recurser restricted to torproject.org (maybe also tails.boum.org, guardianproject.info, f-droid.org)
-	- Transparently proxy requests to only their IPs:443 through Tor
-	- MITM redirect (all?) requests to port 80 to (an info page linking to?) https://torproject.org
+- Build a WiFi/Ethernet portal that allows people to download Tor Browser:
+	- Configure hostapd as an open AP
+	- Configure dnsmasq
+		- as a DHCP server
+		- as a DNS proxy restricted to
+			- torproject.org
+			- maybe also guardianproject.info
+			- maybe also tails.boum.org if they start to offer https for their ISOs
+	- Transparently torify connections to only those domains' IP addresses on port 443
+	- Configure publicfile to serve an info page linking to https://www.torproject.org
+	- MITM all requests to port 80 into a HTTP 302 redirect to that info page
 - Bundle it all up (docker?) for Raspberry Pi / BeagleBone Black
 
 
