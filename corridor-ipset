@@ -13,11 +13,11 @@ TMP=$IPSET.tmp
 shift
 
 {
-	echo create $IPSET "$@" -exist
-	echo create $TMP   "$@" -exist
-	echo flush  $TMP
+	echo create  $IPSET "$@" -exist
+	echo create  $TMP   "$@" -exist
+	echo flush   $TMP
 	sed "s/^/add $TMP /"
-	echo swap $TMP $IPSET
+	echo swap    $TMP $IPSET
 	echo destroy $TMP
 } | ipset restore >&2
 
