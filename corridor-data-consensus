@@ -37,7 +37,7 @@ $IP,$ORPORT"
 
 		.)
 			corridor-ipset-relays <<-END
-				${RELAYS#?}
+				$RELAYS
 			END
 		;;
 
