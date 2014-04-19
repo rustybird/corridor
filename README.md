@@ -39,7 +39,12 @@ You can think of it as defense in depth for your vanilla Tor Browser or Tails, f
 ## Example usage
 
 ```
+# Install to the default location /usr/local/sbin.
+make install
+
+# Or don't install.
 export PATH="$PATH:/path/to/corridor"
+
 
 # Set up the iptables CORRIDOR chain.
 corridor-init-filter
