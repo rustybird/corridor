@@ -12,18 +12,18 @@ receive() {
 }
 
 process() {
-	while read -r _0 _1 _2 _3 _4 _5 _6 _7 _8; do
-		LINE="$_0 $_1 $_2 $_3 $_4 $_5 $_6 $_7 $_8"
+	while read -r LINE; do
+		set -- $LINE
 
-		case "$_0" in
+		case "$1" in
 		[26]50+*)
 			echo Processing router list...
 			RELAYS=
 		;;
 
 		r)
-			IP=$_6
-			ORPORT=$_7
+			IP=$7
+			ORPORT=$8
 		;;
 
 		s)
