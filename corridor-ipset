@@ -4,8 +4,7 @@ PREFIX=corridor_
 
 if test "$1" = --init; then
 	shift
-	ipset create "$PREFIX$@" -exist
-	exit
+	exec ipset create "$PREFIX$@" -exist
 fi
 
 IPSET=$PREFIX${1?}
