@@ -1,6 +1,19 @@
 #!/bin/sh -e
 
 receive() {
+	if test -n "$TOR_CONTROL_SOCKET"; then
+		CTRL=UNIX-CONNECT:$TOR_CONTROL_SOCKET
+	else
+		CTRL=TCP:${TOR_CONTROL_HOST-localhost}:${TOR_CONTROL_PORT-9051}
+	fi
+
+	if test -n "$TOR_CONTROL_COOKIE_AUTH_FILE"; then
+		hex()  { perl -ne "print unpack '(H2)*'"; }
+		auth() { hex <"$TOR_CONTROL_COOKIE_AUTH_FILE"; }
+	else
+		auth() { echo "\"$TOR_CONTROL_PASSWD\""; }
+	fi
+
 	while :; do
 		socat "$CTRL",crnl -,ignoreeof <<-END
 			AUTHENTICATE `auth`
@@ -49,20 +62,4 @@ $IP,$ORPORT"
 	done >&2
 }
 
-setup() {
-	if test -n "$TOR_CONTROL_SOCKET"; then
-		CTRL=UNIX-CONNECT:$TOR_CONTROL_SOCKET
-	else
-		CTRL=TCP:${TOR_CONTROL_HOST-localhost}:${TOR_CONTROL_PORT-9051}
-	fi
-
-	if test -n "$TOR_CONTROL_COOKIE_AUTH_FILE"; then
-		hex()  { perl -ne "print unpack '(H2)*'"; }
-		auth() { hex <"$TOR_CONTROL_COOKIE_AUTH_FILE"; }
-	else
-		auth() { echo "\"$TOR_CONTROL_PASSWD\""; }
-	fi
-}
-
-setup
 receive | process
