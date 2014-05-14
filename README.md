@@ -10,7 +10,7 @@ There are several transparently torifying gateways. They suffer from the same pr
 
 **corridor takes a different approach. It allows only connections to Tor relays to pass through (no clearnet leaks!), but client computers are themselves responsible for torifying their own traffic.** In other words, it is a filtering gateway, not a proxying gateway.
 
-You can think of it as defense in depth for your vanilla Tor Browser or Tails, for your beautiful scary experimental Qubes proxying schemes, etc. Or invite the hood to use your WiFi without getting into trouble. Connections *between* client computers are blocked by default.
+You can think of it as defense in depth for your vanilla Tor Browser or Tails, for your beautiful scary experimental Qubes proxying schemes, etc. Or invite the hood to use your WiFi without getting into trouble.
 
 
 ## Principle of operation
