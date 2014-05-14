@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Don't spam the log with false positives
-until ipset list corridor_relays | grep -q ,tcp:; do
+until ipset list corridor_relays 2>/dev/null | grep -q ,tcp:; do
 	sleep 1
 done
 
