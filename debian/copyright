@@ -1,0 +1,9 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+
+Files: debian/*
+Copyright: 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
+License: public domain
+
+Files: *
+Copyright: Rusty Bird <rustybird@openmailbox.org>
+License: public domain

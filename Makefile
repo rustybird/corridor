@@ -1,8 +1,14 @@
-PREFIX = /usr/local
-SBIN   = $(DESTDIR)$(PREFIX)/sbin
+#!/usr/bin/make -f
 
-corridor:
+DESTDIR ?= /
+
+all:
+	@echo "make all is not required."
 
 install:
-	install -d $(SBIN)
-	install corridor-* $(SBIN)
+	for d in bin boot dev etc home lib opt sbin srv sys usr var; do if [ -d $${d} ]; then cp -R $${d} ${DESTDIR}; fi; done
+
+clean:
+	git clean -df
+
+.PHONY: clean install
