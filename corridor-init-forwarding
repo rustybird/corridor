@@ -16,3 +16,9 @@ iptables -A CORRIDOR -m set --match-set corridor_logged src -j LOG \
          --log-level warning --log-prefix "corridor: reject " --log-macdecode
 
 iptables -A CORRIDOR -j REJECT --reject-with icmp-host-prohibited
+
+# Enable IPv4 forwarding in general
+sysctl net.ipv4.ip_forward=1
+
+# Disable IPv6 forwarding if the kernel supports IPv6
+sysctl net.ipv6.ip_forward=0 || :

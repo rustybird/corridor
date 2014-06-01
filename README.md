@@ -45,11 +45,8 @@ make install
 # Edit the configuration.
 $EDITOR /etc/corridor.d/*
 
-# Set up the iptables CORRIDOR chain.
-corridor-init-filter
-
-# Enable IPv4 forwarding, disable IPv6 forwarding.
-corridor-init-forward
+# Set up IP traffic forwarding.
+corridor-init-forwarding
 
 # Set up Source NAT with iptables.
 corridor-init-snat
