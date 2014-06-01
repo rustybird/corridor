@@ -1,8 +1,10 @@
 #!/bin/sh -e
 
 bridges() {
-	# convert "Bridge [transport] IP:ORPort [fingerprint]" to "IP,ORPort"
 	while read -r LINE; do
+		# convert "Bridge [transport] IP:ORPort [fingerprint]"
+		# to "IP,ORPort"
+
 		set -- $LINE
 
 		if test "$1" = Bridge; then
