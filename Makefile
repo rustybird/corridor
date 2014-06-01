@@ -1,8 +1,8 @@
 PREFIX = /usr/local
-SBIN   = $(DESTDIR)$(PREFIX)/sbin
+SBIN   = $(PREFIX)/sbin
 
 corridor:
 
 install:
-	install -d $(SBIN)
-	install corridor-* $(SBIN)
+	install -d $(DESTDIR)$(SBIN)
+	install corridor-* $(DESTDIR)$(SBIN)
