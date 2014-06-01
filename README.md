@@ -15,8 +15,8 @@ You can think of it as defense in depth for your vanilla Tor Browser or Tails, f
 
 ## Principle of operation
 
-1. Either run the corridor-data-consensus daemon script, which opens a Tor control connection and subscribes to NEWCONSENSUS events (announcements listing all public relays), or pipe any number of "Bridge" lines into corridor-data-bridges.
-2. That data is used to atomically update a Linux ipset (a list of IP-address:TCP-port entries accessible in constant time) named corridor_relays containing all *acceptable* relays along with their ORPort. When using corridor-data-consensus, acceptable means the relays have a Valid flag and a Guard or Authority flag. When using corridor-data-bridges, acceptable refers to your bridge relays.
+1. The corridor-data script opens a Tor control connection and subscribes to NEWCONSENSUS events (announcements listing all public relays), unless you inform it of any bridges to use instead.
+2. That data is used to atomically update a Linux ipset (a list of IP-address:TCP-port entries accessible in constant time) named corridor_relays containing either all your bridges or all *acceptable* relays along with their ORPort. Acceptable means the relays have a Valid flag and a Guard or Authority flag.
 3. iptables rules refuse to forward packets unless they are going to / coming from one of the relays inside the ipset.
 
 
@@ -60,7 +60,7 @@ corridor-init-logged
 ```
 
 
-## How does corridor-data-consensus open a Tor control connection?
+## How does corridor-data open a Tor control connection?
 
 If $TOR_CONTROL_SOCKET is nonempty (e.g. /var/run/tor/control), use it.
 Otherwise, connect to $TOR_CONTROL_HOST (defaults to localhost) on port $TOR_CONTROL_PORT (defaults to 9051).
