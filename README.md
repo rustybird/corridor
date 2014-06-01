@@ -51,11 +51,8 @@ corridor-init-forwarding
 # Set up Source NAT with iptables.
 corridor-init-snat
 
-# Start the daemon that keeps track of public Tor relays.
-corridor-data-consensus &
-
-# Or use bridges instead.
-corridor-data-bridges
+# Keep track of acceptable Tor relays.
+corridor-data &
 
 # Log attempted leaks from selected clients.
 # This command will block until corridor_relays gets populated!

@@ -1,8 +1,23 @@
 #!/bin/sh -e
 
-receive() {
-	. corridor-load-config
+bridges() {
+	# convert "Bridge [transport] IP:ORPort [fingerprint]" to "IP,ORPort"
+	while read -r LINE; do
+		set -- $LINE
 
+		if test "$1" = Bridge; then
+			for x in "$2" "$3"; do
+				case "$x" in *:*)
+					echo ${x%:*},${x#*:}
+				esac
+			done
+		fi
+	done <<-END | corridor-load-ipset-relays
+		$BRIDGES
+	END
+}
+
+receive_consensus() {
 	if test -n "$TOR_CONTROL_SOCKET"; then
 		CTRL=UNIX-CONNECT:$TOR_CONTROL_SOCKET
 	else
@@ -26,7 +41,7 @@ receive() {
 	done
 }
 
-process() {
+process_consensus() {
 	while read -r LINE; do
 		set -- $LINE
 
@@ -64,4 +79,11 @@ $IP,$ORPORT"
 	done >&2
 }
 
-receive | process
+
+. corridor-load-config
+
+if test -n "$BRIDGES"; then
+	bridges
+else
+	receive_consensus | process_consensus
+fi
