@@ -1,11 +1,13 @@
 #!/bin/sh -e
 
+. corridor-load-config
+
+test -n "$LOGGED" || exit 0
+
 # Don't spam the log with false positives
 until ipset list corridor_relays 2>/dev/null | grep -q ,tcp:; do
 	sleep 1
 done
-
-. corridor-load-config
 
 exec corridor-load-ipset-logged <<-END
 	$LOGGED

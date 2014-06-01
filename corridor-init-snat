@@ -3,6 +3,8 @@
 . corridor-load-config
 
 while read PRIV PUB; do
+	test -n "$PRIV" || continue
+
 	if test -n "$PUB"; then
 		set SNAT --to-source "$PUB"
 	else
