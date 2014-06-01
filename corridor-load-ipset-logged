@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+exec corridor-load-ipset "$@" "${0##*-}" hash:net hashsize 64

@@ -49,7 +49,7 @@ $IP,$ORPORT"
 		;;
 
 		.)
-			corridor-ipset-relays <<-END
+			corridor-load-ipset-relays <<-END
 				$RELAYS
 			END
 		;;

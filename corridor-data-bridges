@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # convert "Bridge [transport] IP:ORPort [fingerprint]" lines
-# to "IP,ORPort" lines for corridor-ipset-relays
+# to "IP,ORPort" lines for corridor-load-ipset-relays
 while read -r LINE; do
 	set -- $LINE
 
@@ -12,4 +12,4 @@ while read -r LINE; do
 			esac
 		done
 	fi
-done | corridor-ipset-relays
+done | corridor-load-ipset-relays

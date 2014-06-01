@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 # Ensure that the ipsets to be referenced later exist
-corridor-ipset-relays --init
-corridor-ipset-logged --init
+corridor-load-ipset-relays --init
+corridor-load-ipset-logged --init
 
 iptables -N CORRIDOR
 iptables -I FORWARD -j CORRIDOR
