@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+. corridor-load-config
+
 while read PRIV PUB; do
 	if test -n "$PUB"; then
 		set SNAT --to-source "$PUB"
@@ -8,4 +10,6 @@ while read PRIV PUB; do
 	fi
 
 	iptables -t nat -I POSTROUTING -s "$PRIV" ! -d "$PRIV" -j "$@"
-done
+done <<-END
+	$SNAT
+END

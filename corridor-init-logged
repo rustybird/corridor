@@ -5,4 +5,8 @@ until ipset list corridor_relays 2>/dev/null | grep -q ,tcp:; do
 	sleep 1
 done
 
-exec corridor-load-ipset-logged
+. corridor-load-config
+
+exec corridor-load-ipset-logged <<-END
+	$LOGGED
+END

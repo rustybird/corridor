@@ -1,0 +1,1 @@
+#BRIDGES=`grep -Ei '^[[:space:]]*Bridge[[:space:]]' /etc/tor/torrc`

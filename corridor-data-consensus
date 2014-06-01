@@ -1,6 +1,8 @@
 #!/bin/sh -e
 
 receive() {
+	. corridor-load-config
+
 	if test -n "$TOR_CONTROL_SOCKET"; then
 		CTRL=UNIX-CONNECT:$TOR_CONTROL_SOCKET
 	else

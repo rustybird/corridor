@@ -42,9 +42,8 @@ You can think of it as defense in depth for your vanilla Tor Browser or Tails, f
 # Install to the default location /usr/local/sbin.
 make install
 
-# Or don't install.
-export PATH="$PATH:/path/to/corridor"
-
+# Edit the configuration.
+$EDITOR /etc/corridor.d/*
 
 # Set up the iptables CORRIDOR chain.
 corridor-init-filter
@@ -53,29 +52,17 @@ corridor-init-filter
 corridor-init-forward
 
 # Set up Source NAT with iptables.
-# If a line has a second argument, SNAT --to-source.
-# Otherwise, MASQUERADE.
-corridor-init-snat <<-END
-	10.0.0.0/8 192.168.1.2
-END
+corridor-init-snat
 
 # Start the daemon that keeps track of public Tor relays.
-TOR_CONTROL_COOKIE_AUTH_FILE=/var/run/tor/control.authcookie \
 corridor-data-consensus &
 
 # Or use bridges instead.
-corridor-data-bridges <<-END
-	Bridge [transport] IP:ORPort [fingerprint]
-	...
-END
+corridor-data-bridges
 
-# Log attempted leaks from these clients. (Syntax: ipset(8) hash:net)
+# Log attempted leaks from selected clients.
 # This command will block until corridor_relays gets populated!
-corridor-init-logged <<-END
-	10.1.0.1-10.1.0.9
-	10.2.0.0/16
-	10.2.0.5 nomatch
-END
+corridor-init-logged
 ```
 
 
