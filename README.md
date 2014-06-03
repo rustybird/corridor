@@ -48,7 +48,7 @@ $EDITOR /etc/corridor.d/*
 ```
 
 
-# Usage
+## Usage
 ```
 # Set up IP traffic forwarding.
 corridor-init-forwarding
