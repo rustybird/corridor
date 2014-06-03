@@ -69,14 +69,12 @@ corridor-init-logged
 
 ```
 # If you use something other than systemd-networkd to bring up your
-# network interfaces, you should add an ordering and a dependency:
-mkdir /etc/systemd/corridor.target.d
-cat >>/etc/systemd/corridor.target.d/net.conf <<-END
+# network interfaces, you must add an ordering and a dependency:
+mkdir /etc/systemd/some.service.d
+cat  >/etc/systemd/some.service.d/corridor.conf <<-END
 	[Unit]
-	Before=some.service another.service
-
-	[Install]
-	RequiredBy=some.service another.service
+	Require=corridor.target
+	After=corridor.target
 END
 
 # Start corridor
