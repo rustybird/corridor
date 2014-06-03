@@ -36,7 +36,8 @@ You can think of it as defense in depth for your vanilla Tor Browser or Tails, f
 	- Clients can spoof their source IP address.
 	- The kernel shows MAC addresses in the log lines, maybe you don't want that.
 
-## Example usage
+
+## Installation
 
 ```
 # Install to the default location /usr/local/sbin.
@@ -44,7 +45,11 @@ make install
 
 # Edit the configuration.
 $EDITOR /etc/corridor.d/*
+```
 
+
+# Usage
+```
 # Set up IP traffic forwarding.
 corridor-init-forwarding
 
