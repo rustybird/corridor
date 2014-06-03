@@ -1,0 +1,11 @@
+[Unit]
+Description=corridor's source NAT
+After=iptables.service
+
+[Service]
+ExecStart=SBIN/corridor-init-snat
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

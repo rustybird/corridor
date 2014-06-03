@@ -65,6 +65,28 @@ corridor-init-logged
 ```
 
 
+## systemd
+
+```
+# If you use something other than systemd-networkd to bring up your
+# network interfaces, you should add an ordering and a dependency:
+mkdir /etc/systemd/corridor.target.d
+cat >>/etc/systemd/corridor.target.d/net.conf <<-END
+	[Unit]
+	Before=some.service another.service
+
+	[Install]
+	RequiredBy=some.service another.service
+END
+
+# Start corridor
+systemctl start corridor.target
+
+# Start corridor when booting
+systemctl enable corridor.target
+```
+
+
 ## How does corridor-data open a Tor control connection?
 
 If $TOR_CONTROL_SOCKET is nonempty (e.g. /var/run/tor/control), use it.

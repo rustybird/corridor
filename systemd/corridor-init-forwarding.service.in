@@ -1,0 +1,11 @@
+[Unit]
+Description=corridor's forwarding
+After=iptables.service systemd-sysctl.service
+
+[Service]
+ExecStart=SBIN/corridor-init-forwarding
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
