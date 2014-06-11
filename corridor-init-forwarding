@@ -5,17 +5,14 @@ corridor-load-ipset-relays --init
 corridor-load-ipset-logged --init
 
 iptables -N CORRIDOR
-iptables -I FORWARD -j CORRIDOR
-
 iptables -A CORRIDOR -m conntrack --ctstate ESTABLISHED,RELATED       -j RETURN
 iptables -A CORRIDOR -m set       --match-set corridor_relays dst,dst -j RETURN
-
 # Unfortunately, logging always includes MAC addresses.
 # --log-macdecode just tells the kernel to use a nicer format.
 iptables -A CORRIDOR -m set --match-set corridor_logged src -j LOG \
          --log-level warning --log-prefix "corridor: reject " --log-macdecode
-
 iptables -A CORRIDOR -j REJECT --reject-with icmp-host-prohibited
+iptables -I FORWARD  -j CORRIDOR
 
 # Enable IPv4 forwarding in general
 sysctl net.ipv4.ip_forward=1
