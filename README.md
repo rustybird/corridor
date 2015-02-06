@@ -126,4 +126,4 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 
 ## Redistribution
 
-corridor is in the public domain.
+corridor is ISC licensed, see the LICENSE file for details.
