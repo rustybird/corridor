@@ -10,7 +10,7 @@ There are several transparently torifying gateways. They suffer from the same pr
 
 **corridor takes a different approach. It allows only connections to Tor relays to pass through (no clearnet leaks!), but client computers are themselves responsible for torifying their own traffic.** In other words, it is a filtering gateway, not a proxying gateway.
 
-You can think of it as defense in depth for your vanilla Tor Browser or Tails, for your beautiful scary experimental Qubes proxying schemes, etc. Or invite the hood to use your WiFi without getting into trouble.
+You can think of it as a fail-safe for your vanilla Tor Browser or Tails, for your beautiful scary experimental Qubes proxying schemes, etc. Or invite the hood to use your WiFi without getting into trouble.
 
 
 ## Principle of operation
@@ -22,7 +22,7 @@ You can think of it as defense in depth for your vanilla Tor Browser or Tails, f
 
 ## Pitfalls
 
-- **To be secure, corridor needs two separate network interfaces**, like two Ethernet NICs, or one WiFi radio and one DSL modem. One is to receive incoming traffic from client computers, the other one is to pass the filtered traffic towards the global internet, **and they need to be on different network address spaces**: Clients must not be able to take a shortcut via DHCP, DNS, ICMP Redirect requests, and who knows what else.
+- **To be safe, corridor needs two separate network interfaces**, like two Ethernet NICs, or one WiFi radio and one DSL modem. One is to receive incoming traffic from client computers, the other one is to pass the filtered traffic towards the global internet, **and they need to be on different network address spaces**: Clients must not be able to take a shortcut via DHCP, DNS, ICMP Redirect requests, and who knows what else.
 
 - corridor cannot prevent **malware** on a client computer from **directly contacting a colluding relay to find out your clearnet IP address**. The part of your client system that can open outside TCP connections must be in a trustworthy state! (Whonix and Qubes-TorVM are well-designed in this respect.) Discussion:
 	- https://lists.torproject.org/pipermail/tor-talk/2014-February/032153.html
