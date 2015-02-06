@@ -24,9 +24,7 @@ You can think of it as a fail-safe for your vanilla Tor Browser or Tails, for yo
 
 - **To be safe, corridor needs two separate network interfaces**, like two Ethernet NICs, or one WiFi radio and one DSL modem. One is to receive incoming traffic from client computers, the other one is to pass the filtered traffic towards the global internet, **and they need to be on different network address spaces**: Clients must not be able to take a shortcut via DHCP, DNS, ICMP Redirect requests, and who knows what else.
 
-- corridor cannot prevent **malware** on a client computer from **directly contacting a colluding relay to find out your clearnet IP address**. The part of your client system that can open outside TCP connections must be in a trustworthy state! (Whonix and Qubes-TorVM are well-designed in this respect.) Discussion:
-	- https://lists.torproject.org/pipermail/tor-talk/2014-February/032153.html
-	- https://lists.torproject.org/pipermail/tor-talk/2014-February/032163.html
+- corridor cannot prevent **malware** on a client computer from **finding out your clearnet IP address**, e.g. by sending the `GETINFO address` command to any Tor control port on the network (incl. the one on the client computer itself). **corridor is not a replacement for using a well-designed operating system on your client computers**, like Qubes with TorVM/Whonix.
 
 - The optional **logging of prevented leaks has several limitations**:
 	- Consider the role of DNS:
