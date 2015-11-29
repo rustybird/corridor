@@ -1,6 +1,5 @@
 #!/bin/sh -e
 
-for f in /etc/corridor.d/*[!~]; do
-	case "$f" in *.dpkg-*) continue; esac
+for f in /etc/corridor.d/*.conf; do
 	. "$f"
 done
