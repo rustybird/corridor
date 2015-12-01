@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+test -d /etc/corridor.d || exit 0
+
 for f in /etc/corridor.d/*.conf; do
 	. "$f"
 done
