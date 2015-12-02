@@ -15,7 +15,8 @@ systemd-units: $(UNITS)
 
 install: systemd-units
 	install -d $(DESTDIR)$(SBIN) $(DESTDIR)/etc/corridor.d
-	install corridor-* $(DESTDIR)$(SBIN)
+	install corridor-data corridor-init* corridor-load-ipset* $(DESTDIR)$(SBIN)
+	install -m 644 corridor-load-config $(DESTDIR)$(SBIN)
 	install -m 644 corridor.d/* $(DESTDIR)/etc/corridor.d
 	if pkg-config systemd; then install -d $(DESTDIR)$(SYSTEM) && install -m 644 $(UNITS) $(DESTDIR)$(SYSTEM); fi
 
