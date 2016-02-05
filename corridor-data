@@ -89,7 +89,7 @@ process_consensus() {
 		.)
 			case "$RELAYS" in ?*)
 				corridor-load-ipset-relays <<-END
-					$DIRECTORY_AUTHORITIES
+					$DIR_AUTHS
 					$RELAYS
 				END
 			esac
