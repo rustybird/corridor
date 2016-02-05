@@ -36,6 +36,7 @@ receive_consensus() {
 	while :; do
 		socat "$CTRL",crnl -,ignoreeof <<-END || :
 			AUTHENTICATE `auth`
+			GETINFO config/defaults
 			GETINFO ns/all
 			SETEVENTS NEWCONSENSUS
 		END
@@ -44,10 +45,28 @@ receive_consensus() {
 }
 
 process_consensus() {
+	DIR_AUTHS=
+
 	while read -r LINE; do
 		set -- $LINE
 
 		case "$1" in
+		DirAuthority)
+			ORPORT=
+			for s; do
+				case "$s" in
+				     orport=*) ORPORT=${s#*=} ;;
+				   *[!0-9.:]*) continue ;;
+				*[0-9]:[0-9]*)
+					if test -n "$ORPORT"; then
+						DIR_AUTHS="$DIR_AUTHS
+						           ${s%:*},$ORPORT"
+					fi
+				;;
+				esac
+			done
+		;;
+
 		[26]50+*)
 			echo Processing router list...
 			RELAYS=
@@ -60,7 +79,7 @@ process_consensus() {
 
 		s)
 			case         "$LINE " in *" Valid "*)
-				case "$LINE " in *" Guard "* | *" Authority "*)
+				case "$LINE " in *" Guard "*)
 					RELAYS="$RELAYS
 					        $IP,$ORPORT"
 				esac
@@ -68,9 +87,12 @@ process_consensus() {
 		;;
 
 		.)
-			corridor-load-ipset-relays <<-END
-				$RELAYS
-			END
+			case "$RELAYS" in ?*)
+				corridor-load-ipset-relays <<-END
+					$DIRECTORY_AUTHORITIES
+					$RELAYS
+				END
+			esac
 		;;
 
 		5*)

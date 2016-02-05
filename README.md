@@ -96,7 +96,7 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 
 - ipset, iptables, sysctl
 - socat (to open control connections)
-- sh, make, grep, sed, sleep, test, echo
+- sh, make, grep, sed, sleep, sort, test, echo
 - perl (to convert control cookies to hex, easily replacable)
 - Linux kernel:
 	- CONFIG_IP_SET_HASH_IPPORT
