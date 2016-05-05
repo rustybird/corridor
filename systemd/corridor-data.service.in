@@ -1,6 +1,5 @@
 [Unit]
 Description=corridor's relay list
-After=tor.service
 
 [Service]
 ExecStart=SBIN/corridor-data

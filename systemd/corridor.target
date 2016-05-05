@@ -1,10 +1,8 @@
 [Unit]
-Description=Tor traffic whitelisting gateway
-Wants=corridor-init-snat.service corridor-data.service corridor-init-logged.service
-Requires=corridor-init-forwarding.service
-After=corridor-init-forwarding.service
-Before=systemd-networkd.service network.target
+Description=corridor, a Tor traffic whitelisting gateway
+Wants=corridor-init-forwarding.service corridor-init-snat.service corridor-init-logged.service corridor-data.service
+After=corridor-init-forwarding.service corridor-init-snat.service corridor-init-logged.service corridor-data.service
 
 [Install]
 WantedBy=multi-user.target
-RequiredBy=systemd-networkd.service network.target
+Also=corridor-init-forwarding.service

@@ -72,8 +72,8 @@ corridor-init-logged
 mkdir /etc/systemd/some.service.d
 cat  >/etc/systemd/some.service.d/corridor.conf <<-END
 	[Unit]
-	Require=corridor.target
-	After=corridor.target
+	Require=corridor-init-forwarding.service
+	After=corridor-init-forwarding.service
 END
 
 # Start corridor
