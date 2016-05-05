@@ -11,7 +11,7 @@ while read PRIV PUB; do
 		set MASQUERADE
 	fi
 
-	iptables -t nat -I POSTROUTING -s "$PRIV" ! -d "$PRIV" -j "$@"
+	iptables -w -t nat -I POSTROUTING -s "$PRIV" ! -d "$PRIV" -j "$@"
 done <<-END
 	$SNAT
 END
