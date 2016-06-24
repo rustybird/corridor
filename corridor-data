@@ -91,11 +91,14 @@ process_consensus() {
 				{
 					sed -e 's/^[[:space:]]*//' -e '/^$/d' |
 					sort -u |
+					tee -- "$RELAYS_STATE".tmp |
 					corridor-load-ipset-relays
 				} <<-END
 					$DIR_AUTHS
 					$RELAYS
 				END
+
+				mv -- "$RELAYS_STATE".tmp "$RELAYS_STATE"
 			esac
 		;;
 
@@ -113,5 +116,9 @@ process_consensus() {
 if test -n "$BRIDGES"; then
 	bridges
 else
+	if test -e "$RELAYS_STATE"; then
+		corridor-load-ipset-relays <"$RELAYS_STATE"
+	fi
+
 	receive_consensus | process_consensus
 fi

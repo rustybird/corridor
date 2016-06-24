@@ -14,7 +14,7 @@ systemd-units: $(UNITS)
 	sed 's:SBIN/:$(SBIN)/:' $< >$@
 
 install: systemd-units
-	install -d $(DESTDIR)$(SBIN) $(DESTDIR)/etc/corridor.d
+	install -d $(DESTDIR)$(SBIN) $(DESTDIR)/etc/corridor.d $(DESTDIR)/var/lib/corridor
 	install corridor-data corridor-init* corridor-load-ipset* $(DESTDIR)$(SBIN)
 	install -m 644 corridor-load-config $(DESTDIR)$(SBIN)
 	install -m 644 corridor.d/* $(DESTDIR)/etc/corridor.d
