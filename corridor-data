@@ -88,7 +88,11 @@ process_consensus() {
 
 		.)
 			case "$RELAYS" in ?*)
-				corridor-load-ipset-relays <<-END
+				{
+					sed -e 's/^[[:space:]]*//' -e '/^$/d' |
+					sort -u |
+					corridor-load-ipset-relays
+				} <<-END
 					$DIR_AUTHS
 					$RELAYS
 				END
