@@ -1,7 +1,7 @@
 [Unit]
 Description=corridor's forwarding
 After=iptables.service systemd-sysctl.service
-Before=systemd-networkd.service
+Before=network-pre.target
 
 [Service]
 ExecStart=SBIN/corridor-init-forwarding
