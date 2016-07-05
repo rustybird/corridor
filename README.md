@@ -139,3 +139,13 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 ## Redistribution
 
 corridor is ISC licensed, see the LICENSE file for details.
+
+## Version
+
+Git master is supposed to stay usable and permanent, with experimental stuff going into other branches.
+
+Version number equal ISO 8601 timestamps. To find out what the latest version number of the master branch is you could run the following command.
+
+```
+git show --no-patch --pretty=format:%ai master | tr -dc 0-9 | cut -b 1-14
+```
