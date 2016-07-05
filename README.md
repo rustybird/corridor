@@ -141,7 +141,7 @@ Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
 The git `master` branch is supposed to stay usable and permanent, with experimental stuff going into other branches. If you want to package corridor and need a version number, you can use `0.DATE`, where `DATE` is the output of
 
 ```
-git show --no-patch --pretty=format:%ai COMMIT | tr -dc 0-9 | cut -b -14
+git show --no-patch --pretty=format:%ci COMMIT | tr -dc 0-9 | cut -b -14
 ```
 
 For example, commit `00a072fbef4f3cae9de30c0c8ffa9dfa72066135` corresponds to version `0.20160705124725`. At some point, the major version will be bumped to 1 and corridor will switch to [semantic versioning](http://semver.org/).
