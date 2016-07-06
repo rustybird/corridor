@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+iptables -w -t nat -D POSTROUTING -j CORRIDOR_SNAT
+iptables -w -t nat -F CORRIDOR_SNAT
+iptables -w -t nat -X CORRIDOR_SNAT

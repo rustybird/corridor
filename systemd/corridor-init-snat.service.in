@@ -4,6 +4,7 @@ After=iptables.service
 
 [Service]
 ExecStart=SBIN/corridor-init-snat
+ExecStop=SBIN/corridor-stop-snat
 Type=oneshot
 RemainAfterExit=yes
 
