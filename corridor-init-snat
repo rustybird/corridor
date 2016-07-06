@@ -2,8 +2,15 @@
 
 . corridor-load-config
 
+FIRST=x
 while read PRIV PUB; do
 	test -n "$PRIV" || continue
+
+	if test -n "$FIRST"; then
+		iptables -w -t nat -N CORRIDOR_SNAT
+		iptables -w -t nat -I POSTROUTING -j CORRIDOR_SNAT
+		FIRST=
+	fi
 
 	if test -n "$PUB"; then
 		set SNAT --to-source "$PUB"
@@ -11,7 +18,7 @@ while read PRIV PUB; do
 		set MASQUERADE
 	fi
 
-	iptables -w -t nat -I POSTROUTING -s "$PRIV" ! -d "$PRIV" -j "$@"
+	iptables -w -t nat -I CORRIDOR_SNAT -s "$PRIV" ! -d "$PRIV" -j "$@"
 done <<-END
 	$SNAT
 END
