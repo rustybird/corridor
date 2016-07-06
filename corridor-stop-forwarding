@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+sysctl net.ipv4.ip_forward=0
+
+iptables -w -D FORWARD -j CORRIDOR_FORWARD
+iptables -w -F CORRIDOR_FORWARD
+iptables -w -X CORRIDOR_FORWARD
