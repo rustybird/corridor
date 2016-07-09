@@ -1,0 +1,124 @@
+corridor(8) -- Tor traffic whitelisting gateway
+=============================================
+
+<span class="comment">
+Copyright (c) 2016, Patrick Schleizer (adrelanos@riseup.net)
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+</span>
+
+## SYNOPSIS
+
+`corridor-data`
+
+`corridor-init-forwarding`
+
+`corridor-init-logged`
+
+`corridor-init-snat`
+
+`corridor-load-config`
+
+`corridor-load-ipset`
+
+`corridor-load-ipset-logged`
+
+`corridor-load-ipset-relays`
+
+`corridor-stop-forwarding`
+
+`corridor-stop-snat`
+
+## DESCRIPTION
+
+corridor allows only connections to Tor relays to pass through (no clearnet
+leaks!), but client computers are themselves responsible for torifying their
+own traffic. In other words, it is a filtering gateway, not a proxying
+gateway.
+
+You can think of it as a fail-safe for your vanilla Tor Browser or Tails, for
+your beautiful scary experimental Qubes proxying schemes, etc. Or invite the
+hood to use your WiFi without getting into trouble.
+
+## corridor-data
+
+Keep track of acceptable Tor relays.
+
+corridor-data script opens a Tor control connection and subscribes to
+NEWCONSENSUS events (announcements listing all public relays), unless you
+inform it of any bridges to use instead.
+
+`corridor-data &`
+
+## corridor-init-forwarding
+
+Set up IP traffic forwarding.
+
+`corridor-init-forwarding`
+
+## corridor-init-snat
+
+Set up Source NAT with iptables.
+
+`corridor-init-snat`
+
+## corridor-init-logged
+
+Log attempted leaks from selected clients.
+This command will block until corridor_relays gets populated!
+
+`corridor-init-logged`
+
+## corridor-load-config
+
+Sanity test for the /etc/corridor.d configuration folder.
+
+Also internally used by corridor.
+
+`corridor-load-config`
+
+## corridor-stop-forwarding
+## corridor-stop-snat
+
+Stop actions.
+
+## corridor-load-ipset
+## corridor-load-ipset-logged
+## corridor-load-ipset-relays
+
+Internally used by corridor.
+
+## RETURN VALUES
+
+_0_ Success.
+
+__non-zero__ Failure.
+
+## CONFIGURATION FOLDER
+
+`/etc/corridor.d`
+
+## WWW
+
+https://github.com/rustybird/corridor
+
+## DISCLAIMER
+
+This package is produced independently of, and carries no guarantee from, The
+Tor Project.
+
+## AUTHOR
+
+This man page has been written by Patrick Schleizer (adrelanos@riseup.net).
+
+corridor has been written by rustybird (rustybird@openmailbox.org).
