@@ -1,0 +1,118 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "CORRIDOR" "8" "July 2016" "" ""
+.
+.SH "NAME"
+\fBcorridor\fR \- Tor traffic whitelisting gateway
+.
+.P
+.
+.P
+.
+.P
+.
+.SH "SYNOPSIS"
+\fBcorridor\-data\fR
+.
+.P
+\fBcorridor\-init\-forwarding\fR
+.
+.P
+\fBcorridor\-init\-logged\fR
+.
+.P
+\fBcorridor\-init\-snat\fR
+.
+.P
+\fBcorridor\-load\-config\fR
+.
+.P
+\fBcorridor\-load\-ipset\fR
+.
+.P
+\fBcorridor\-load\-ipset\-logged\fR
+.
+.P
+\fBcorridor\-load\-ipset\-relays\fR
+.
+.P
+\fBcorridor\-stop\-forwarding\fR
+.
+.P
+\fBcorridor\-stop\-snat\fR
+.
+.SH "DESCRIPTION"
+corridor allows only connections to Tor relays to pass through (no clearnet leaks!), but client computers are themselves responsible for torifying their own traffic\. In other words, it is a filtering gateway, not a proxying gateway\.
+.
+.P
+You can think of it as a fail\-safe for your vanilla Tor Browser or Tails, for your beautiful scary experimental Qubes proxying schemes, etc\. Or invite the hood to use your WiFi without getting into trouble\.
+.
+.SH "corridor\-data"
+Keep track of acceptable Tor relays\.
+.
+.P
+corridor\-data script opens a Tor control connection and subscribes to NEWCONSENSUS events (announcements listing all public relays), unless you inform it of any bridges to use instead\.
+.
+.P
+\fBcorridor\-data &\fR
+.
+.SH "corridor\-init\-forwarding"
+Set up IP traffic forwarding\.
+.
+.P
+\fBcorridor\-init\-forwarding\fR
+.
+.SH "corridor\-init\-snat"
+Set up Source NAT with iptables\.
+.
+.P
+\fBcorridor\-init\-snat\fR
+.
+.SH "corridor\-init\-logged"
+Log attempted leaks from selected clients\. This command will block until corridor_relays gets populated!
+.
+.P
+\fBcorridor\-init\-logged\fR
+.
+.SH "corridor\-load\-config"
+Sanity test for the /etc/corridor\.d configuration folder\.
+.
+.P
+Also internally used by corridor\.
+.
+.P
+\fBcorridor\-load\-config\fR
+.
+.SH "corridor\-stop\-forwarding"
+.
+.SH "corridor\-stop\-snat"
+Stop actions\.
+.
+.SH "corridor\-load\-ipset"
+.
+.SH "corridor\-load\-ipset\-logged"
+.
+.SH "corridor\-load\-ipset\-relays"
+Internally used by corridor\.
+.
+.SH "EXIT STATUS"
+\fI0\fR Success\.
+.
+.P
+\fInon\-zero\fR Failure\.
+.
+.SH "CONFIGURATION FOLDER"
+\fB/etc/corridor\.d\fR
+.
+.SH "WWW"
+https://github\.com/rustybird/corridor
+.
+.SH "DISCLAIMER"
+This package is produced independently of, and carries no guarantee from, The Tor Project\.
+.
+.SH "AUTHOR"
+This man page has been written by Patrick Schleizer (adrelanos@riseup\.net)\.
+.
+.P
+corridor has been written by Rusty Bird (rustybird@openmailbox\.org)\.
