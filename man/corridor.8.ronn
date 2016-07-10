@@ -109,7 +109,7 @@ Stop actions.
 
 Internally used by corridor.
 
-## RETURN VALUES
+## EXIT STATUS
 
 _0_ Success.
 
@@ -132,4 +132,4 @@ Tor Project.
 
 This man page has been written by Patrick Schleizer (adrelanos@riseup.net).
 
-corridor has been written by rustybird (rustybird@openmailbox.org).
+corridor has been written by Rusty Bird (rustybird@openmailbox.org).
