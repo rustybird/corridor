@@ -89,7 +89,7 @@ systemctl enable corridor.target
 You may want to add the line
 
 ```
-DirPort 127.0.0.1:9030
+DirPort 127.0.0.1:9030 NoAdvertise
 ```
 
 to /etc/tor/torrc to always keep the relay list up to date, even when there's no local activity and tor would otherwise suspend itself.
