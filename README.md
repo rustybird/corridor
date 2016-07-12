@@ -84,17 +84,6 @@ systemctl enable corridor.target
 ```
 
 
-## torrc
-
-You may want to add the line
-
-```
-DirPort 127.0.0.1:9030 NoAdvertise
-```
-
-to /etc/tor/torrc to always keep the relay list up to date, even when there's no local activity and tor would otherwise suspend itself.
-
-
 ## How does corridor-data open a Tor control connection?
 
 If $TOR_CONTROL_SOCKET is nonempty (e.g. /var/run/tor/control), use it.

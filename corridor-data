@@ -36,6 +36,7 @@ receive_consensus() {
 	while :; do
 		socat "$CTRL",crnl -,ignoreeof <<-END || :
 			AUTHENTICATE `auth`
+			SETCONF DirPort="127.0.0.1:9030 NoAdvertise"
 			GETINFO config/defaults
 			GETINFO ns/all
 			SETEVENTS NEWCONSENSUS
