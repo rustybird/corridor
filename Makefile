@@ -17,18 +17,21 @@ systemd-units: $(UNITS)
 %.8: %.8.ronn
 	ronn -r $<
 
-install: systemd-units man/corridor.8
+install: man/corridor.8
 	install -d $(DESTDIR)$(SBIN) $(DESTDIR)$(MAN)/man8 $(DESTDIR)/etc/corridor.d $(DESTDIR)/var/lib/corridor
 	install sbin/* $(DESTDIR)$(SBIN)
 	install -m 644 man/corridor.8 $(DESTDIR)$(MAN)/man8
 	for f in sbin/*; do ln -sf corridor.8 $(DESTDIR)$(MAN)/man8/$${f##*/}.8; done
 	install -m 644 corridor.d/* $(DESTDIR)/etc/corridor.d
-	if pkg-config systemd; then install -d $(DESTDIR)$(SYSTEM) && install -m 644 $(UNITS) $(DESTDIR)$(SYSTEM); fi
 
-install-qubes: install
+install-systemd: systemd-units
+	install -d $(DESTDIR)$(SYSTEM)
+	install -m 644 $(UNITS) $(DESTDIR)$(SYSTEM)
+
+install-qubes:
+	install -d $(DESTDIR)/etc/corridor.d $(DESTDIR)$(SYSTEM)
 	install -m 644 qubes/corridor.d/* $(DESTDIR)/etc/corridor.d
 	umask 022 && cp -RP qubes/systemd/* $(DESTDIR)$(SYSTEM)
-	systemctl enable corridor.target
 
 clean:
 	rm -f systemd/*.service

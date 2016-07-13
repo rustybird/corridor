@@ -38,15 +38,15 @@ You can think of it as a fail-safe for your vanilla Tor Browser or Tails, for yo
 ## Installation
 
 ```
-# Install to the default location /usr/local/sbin.
-make install
+# Install corridor and its systemd units to the default location in /usr/local.
+make install install-systemd
 
 # Edit the configuration.
 $EDITOR /etc/corridor.d/*
 ```
 
 
-## Usage
+## Manual usage
 
 ```
 # Set up IP traffic forwarding.
@@ -88,7 +88,8 @@ systemctl enable corridor.target
 ```
 # In your template:
 dnf install tor ipset socat perl make  # or apt-get ...
-make PREFIX=/usr clean install-qubes
+make PREFIX=/usr install install-systemd install-qubes
+systemctl enable corridor.target
 
 # In dom0:
 qvm-create --proxy --template your-template --label blue corridor-gateway
