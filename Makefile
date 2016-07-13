@@ -27,7 +27,7 @@ install: systemd-units man/corridor.8
 
 install-qubes: install
 	install -m 644 qubes/corridor.d/* $(DESTDIR)/etc/corridor.d
-	umask 022; cp -r qubes/systemd/* $(DESTDIR)$(SYSTEM)
+	umask 022 && cp -RP qubes/systemd/* $(DESTDIR)$(SYSTEM)
 	systemctl enable corridor.target
 
 clean:
