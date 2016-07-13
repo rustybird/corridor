@@ -1,6 +1,7 @@
-**This is an early release. HERE BE DRAGONS? Not affiliated with the Tor Project.**
-
 # corridor, a Tor traffic whitelisting gateway
+
+**Not affiliated with the Tor Project.**
+
 
 There are several transparently torifying gateways. They suffer from the same problems:
 
