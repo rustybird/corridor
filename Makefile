@@ -19,9 +19,9 @@ systemd-units: $(UNITS)
 
 install: systemd-units man/corridor.8
 	install -d $(DESTDIR)$(SBIN) $(DESTDIR)$(MAN)/man8 $(DESTDIR)/etc/corridor.d $(DESTDIR)/var/lib/corridor
-	install corridor-* $(DESTDIR)$(SBIN)
+	install sbin/* $(DESTDIR)$(SBIN)
 	install -m 644 man/corridor.8 $(DESTDIR)$(MAN)/man8
-	for f in corridor-*; do ln -sf corridor.8 $(DESTDIR)$(MAN)/man8/$$f.8; done
+	for f in sbin/*; do ln -sf corridor.8 $(DESTDIR)$(MAN)/man8/$${f##*/}.8; done
 	install -m 644 corridor.d/* $(DESTDIR)/etc/corridor.d
 	if pkg-config systemd; then install -d $(DESTDIR)$(SYSTEM) && install -m 644 $(UNITS) $(DESTDIR)$(SYSTEM); fi
 
