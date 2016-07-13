@@ -86,11 +86,13 @@ systemctl enable corridor.target
 
 ## How does corridor-data open a Tor control connection?
 
-If $TOR_CONTROL_SOCKET is nonempty (e.g. /var/run/tor/control), use it.
-Otherwise, connect to $TOR_CONTROL_HOST (defaults to localhost) on port $TOR_CONTROL_PORT (defaults to 9051).
+If $TOR_CONTROL_SOCKET is nonempty, use it.
+Otherwise, connect to $TOR_CONTROL_HOST (localhost if unset) on $TOR_CONTROL_PORT (9051 if unset).
 
-If $TOR_CONTROL_COOKIE_AUTH_FILE is nonempty (e.g. /var/run/tor/control.authcookie), use it.
-Otherwise, pass $TOR_CONTROL_PASSWD (defaults to an empty password).
+If $TOR_CONTROL_COOKIE_AUTH_FILE is nonempty, use it.
+Otherwise, pass $TOR_CONTROL_PASSWD.
+
+The default configuration file sets $TOR_CONTROL_SOCKET to /var/run/tor/control, and $TOR_CONTROL_COOKIE_AUTH_FILE to /var/run/tor/control.authcookie. These values work on Debian and Fedora.
 
 
 ## Dependencies so far
