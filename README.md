@@ -125,7 +125,7 @@ The default configuration file sets $TOR_CONTROL_SOCKET to /var/run/tor/control,
 
 ## Todo
 
-- Allow IPv6 connections to Tor relays instead of blocking all IPv6 traffic
+- Configure dnsmasq as a logging (but non-forwarding) DNS server
 - Build a WiFi/Ethernet portal that allows people to download Tor Browser:
 	- Configure hostapd as an open AP
 	- Configure dnsmasq
@@ -137,7 +137,7 @@ The default configuration file sets $TOR_CONTROL_SOCKET to /var/run/tor/control,
 	- Transparently torify connections to only those domains' IP addresses on port 443
 	- Configure publicfile to serve an info page linking to https://www.torproject.org
 	- MITM all requests to port 80 into a HTTP 302 redirect to that info page
-- Bundle it all up (docker?) for Raspberry Pi / BeagleBone Black
+- OpenWRT support
 
 
 ## Version numbers
