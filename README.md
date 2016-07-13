@@ -84,6 +84,18 @@ systemctl enable corridor.target
 ```
 
 
+## Qubes (very lightly tested!)
+```
+# In your template:
+dnf install tor ipset socat perl make  # or apt-get ...
+make PREFIX=/usr clean install-qubes
+
+# In dom0:
+qvm-create --proxy --template your-template --label blue corridor-gateway
+qvm-service --enable corridor-gateway corridor
+```
+
+
 ## How does corridor-data open a Tor control connection?
 
 If $TOR_CONTROL_SOCKET is nonempty, use it.

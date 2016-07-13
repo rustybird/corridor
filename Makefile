@@ -25,5 +25,10 @@ install: systemd-units man/corridor.8
 	install -m 644 corridor.d/* $(DESTDIR)/etc/corridor.d
 	if pkg-config systemd; then install -d $(DESTDIR)$(SYSTEM) && install -m 644 $(UNITS) $(DESTDIR)$(SYSTEM); fi
 
+install-qubes: install
+	install -m 644 qubes/corridor.d/* $(DESTDIR)/etc/corridor.d
+	umask 022; cp -r qubes/systemd/* $(DESTDIR)$(SYSTEM)
+	systemctl enable corridor.target
+
 clean:
 	rm -f systemd/*.service
