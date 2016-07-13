@@ -68,7 +68,7 @@ process_consensus() {
 			done
 		;;
 
-		[26]50+*)
+		250+ns/all=|650+*)
 			echo Processing router list...
 			RELAYS=
 		;;
