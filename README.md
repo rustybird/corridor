@@ -85,7 +85,10 @@ systemctl enable corridor.target
 ```
 
 
-## Qubes (very lightly tested!)
+## Qubes
+
+**This has barely even been tested, be careful!**
+
 ```
 # In your template:
 dnf install tor ipset socat perl make  # or apt-get ...
