@@ -146,7 +146,7 @@ The default configuration file sets $TOR_CONTROL_SOCKET to /var/run/tor/control,
 
 ## Version numbers
 
-[semantic versioning](http://semver.org/) is used in the form of signed git tags.
+[Semantic versioning](http://semver.org/) is used in the form of signed git tags.
 
 
 ## Redistribution
