@@ -1,5 +1,12 @@
 #!/bin/sh -e
 
+loosely_ipv4_and_port() {
+	# called thousands of times per consensus update
+	case "$1" in           *[!0-9.:]*) return 1; esac
+	case "$1" in *[0-9].*[0-9]:*[0-9]) return 0; esac
+	return 1
+}
+
 bridges() {
 	while read -r LINE; do
 		# convert "Bridge [transport] IP:ORPort [fingerprint]"
@@ -8,10 +15,11 @@ bridges() {
 		set -- $LINE
 
 		if test "$1" = Bridge; then
-			for x in "$2" "$3"; do
-				case "$x" in *:*)
-					echo ${x%:*},${x#*:}
-				esac
+			for s in "$2" "$3"; do
+				if loosely_ipv4_and_port "$s"; then
+					echo "${s%:*},${s#*:}"
+					break
+				fi
 			done
 		fi
 	done <<-END | corridor-load-ipset-relays
@@ -56,12 +64,12 @@ process_consensus() {
 			ORPORT=
 			for s; do
 				case "$s" in
-				     orport=*) ORPORT=${s#*=} ;;
-				   *[!0-9.:]*) continue ;;
-				*[0-9]:[0-9]*)
-					if test -n "$ORPORT"; then
+				orport=*) ORPORT=${s#*=} ;;
+				*)
+					if loosely_ipv4_and_port "$s"; then
 						DIR_AUTHS="$DIR_AUTHS
 						           ${s%:*},$ORPORT"
+						break
 					fi
 				;;
 				esac
