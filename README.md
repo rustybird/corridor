@@ -38,6 +38,16 @@ You can think of it as a fail-safe for your vanilla Tor Browser or Tails, for yo
 
 ## Installation
 
+Third party:
+
+* [Debian](https://www.debian.org) -> [corridor packaged for Debian](https://github.com/rustybird/corridor)
+* [Qubes](https://www.qubes-os.org) -> [Qubes corridor instructions](https://www.whonix.org/wiki/Corridor)
+* [Qubes-Whonix](https://www.qubes-os.org/doc/whonix/) -> [Qubes-Whonix corridor instructions](https://www.whonix.org/wiki/Corridor)
+
+Upstream:
+
+* generic -> see below
+
 ```
 # Install corridor and its systemd units to the default location in /usr/local.
 make install install-systemd
