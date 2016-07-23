@@ -2,6 +2,6 @@
 
 sysctl net.ipv4.ip_forward=0
 
-iptables -w -D FORWARD -j CORRIDOR_FORWARD
-iptables -w -F CORRIDOR_FORWARD
-iptables -w -X CORRIDOR_FORWARD
+iptables -w -D FORWARD -j CORRIDOR_FILTER
+iptables -w -F CORRIDOR_FILTER
+iptables -w -X CORRIDOR_FILTER
