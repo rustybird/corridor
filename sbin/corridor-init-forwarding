@@ -10,7 +10,7 @@ iptables -w -A CORRIDOR_FILTER -m set       --match-set corridor_relays dst,dst 
 # Unfortunately, logging always includes MAC addresses.
 # --log-macdecode just tells the kernel to use a nicer format.
 iptables -w -A CORRIDOR_FILTER -m set --match-set corridor_logged src -j LOG \
-         --log-level warning --log-prefix "corridor: reject " --log-macdecode
+               --log-level warning --log-prefix "corridor: reject " --log-macdecode
 iptables -w -A CORRIDOR_FILTER -j REJECT --reject-with icmp-host-prohibited
 iptables -w -I FORWARD -j CORRIDOR_FILTER
 
