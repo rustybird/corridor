@@ -4,7 +4,7 @@ if test "${0##*/}" = corridor-load-config; then
 	set -x
 fi
 
-for f in /etc/corridor.d/*.conf; do
+for f in /etc/corridor.d/*.conf /usr/local/etc/corridor.d/*.conf; do
 	if test -e "$f"; then
 		. "$f"
 	fi

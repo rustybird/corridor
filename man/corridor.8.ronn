@@ -92,9 +92,7 @@ This command will block until corridor_relays gets populated!
 
 ## corridor-load-config
 
-Sanity test for the /etc/corridor.d configuration folder.
-
-Also internally used by corridor.
+Sanity test for the configuration folders. Also internally used by corridor.
 
 `corridor-load-config`
 
@@ -115,9 +113,9 @@ _0_ Success.
 
 _non-zero_ Failure.
 
-## CONFIGURATION FOLDER
+## CONFIGURATION FOLDERS
 
-`/etc/corridor.d`
+`/etc/corridor.d` and `/usr/local/etc/corridor.d`
 
 ## WWW
 
