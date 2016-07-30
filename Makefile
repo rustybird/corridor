@@ -12,7 +12,7 @@ UNITS = systemd/corridor-data.service \
 systemd-units: $(UNITS)
 
 %.service: %.service.in
-	sed 's:SBIN/:$(SBIN)/:' $< >$@
+	sed 's:@SBIN@:$(SBIN):' $< >$@
 
 %.8: %.8.ronn
 	ronn -r $<

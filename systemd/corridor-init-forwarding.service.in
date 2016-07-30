@@ -5,8 +5,8 @@ Before=network-pre.target
 Wants=network-pre.target
 
 [Service]
-ExecStart=SBIN/corridor-init-forwarding
-ExecStop=SBIN/corridor-stop-forwarding
+ExecStart=@SBIN@/corridor-init-forwarding
+ExecStop=@SBIN@/corridor-stop-forwarding
 Type=oneshot
 RemainAfterExit=yes
 

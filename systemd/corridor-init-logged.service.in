@@ -2,7 +2,7 @@
 Description=corridor's logging
 
 [Service]
-ExecStart=SBIN/corridor-init-logged
+ExecStart=@SBIN@/corridor-init-logged
 Type=oneshot
 
 [Install]

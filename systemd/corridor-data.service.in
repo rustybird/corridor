@@ -2,7 +2,7 @@
 Description=corridor's relay list
 
 [Service]
-ExecStart=SBIN/corridor-data
+ExecStart=@SBIN@/corridor-data
 Restart=on-failure
 RestartSec=10
 
