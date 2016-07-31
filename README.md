@@ -151,4 +151,4 @@ The default configuration file sets $TOR_CONTROL_SOCKET to /var/run/tor/control,
 
 ## Redistribution
 
-corridor is ISC licensed, see the LICENSE file for details.
+corridor is permissively licensed, see the LICENSE-ISC file for details.
