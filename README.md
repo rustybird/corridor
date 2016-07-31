@@ -72,9 +72,9 @@ corridor-init-logged
 # network interfaces (make sure that whatever it is correctly orders
 # itself after network-pre.target!), you must add a dependency:
 mkdir /etc/systemd/some.service.d
-cat  >/etc/systemd/some.service.d/corridor.conf <<-END
-	[Unit]
-	Requires=corridor-init-forwarding.service
+cat  >/etc/systemd/some.service.d/corridor.conf <<END
+[Unit]
+Requires=corridor-init-forwarding.service
 END
 
 # Start corridor
