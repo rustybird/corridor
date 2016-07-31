@@ -117,7 +117,7 @@ The default configuration file sets $TOR_CONTROL_SOCKET to /var/run/tor/control,
 - ipset, iptables, sysctl
 - socat (to open control connections)
 - sh, make, grep, sed, sleep, sort, test, echo
-- perl (to convert control cookies to hex, easily replacable)
+- perl (to convert control cookies to hex, easily replaceable)
 - Linux kernel:
 	- CONFIG_IP_SET_HASH_IPPORT
 	- CONFIG_IP_SET_HASH_NET
