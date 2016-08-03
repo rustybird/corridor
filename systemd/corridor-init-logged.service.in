@@ -1,5 +1,7 @@
 [Unit]
 Description=corridor's logging
+Requires=corridor-data.service
+After=corridor-data.service
 
 [Service]
 ExecStart=@SBIN@/corridor-init-logged
