@@ -9,7 +9,7 @@ UNITS = systemd/corridor-data.service \
         systemd/corridor-init-snat.service \
         systemd/corridor.target
 
-default:
+default: man/corridor.8
 
 systemd-units: $(UNITS)
 
