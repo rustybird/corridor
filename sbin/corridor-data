@@ -54,13 +54,13 @@ receive_consensus() {
 }
 
 process_consensus() {
-	DIR_AUTHS=
+	HARDCODED_DIRS=
 
 	while read -r LINE; do
 		set -- $LINE
 
 		case "$1" in
-		DirAuthority)
+		DirAuthority|FallbackDir)
 			IP=
 			ORPORT=
 
@@ -70,6 +70,7 @@ process_consensus() {
 					ORPORT=${s#*=}
 				;;
 				*)
+					s=${s#\"}
 					if loosely_ipv4_and_port "$s"; then
 						IP=${s%:*}
 					fi
@@ -77,8 +78,8 @@ process_consensus() {
 				esac
 
 				if test -n "$IP" -a -n "$ORPORT"; then
-					DIR_AUTHS="$DIR_AUTHS
-					           $IP,$ORPORT"
+					HARDCODED_DIRS="$HARDCODED_DIRS
+					                $IP,$ORPORT"
 					break
 				fi
 			done
@@ -111,7 +112,7 @@ process_consensus() {
 					tee -- "$RELAYS_STATE".tmp |
 					corridor-load-ipset-relays
 				} <<-END
-					$DIR_AUTHS
+					$HARDCODED_DIRS
 					$RELAYS
 				END
 
