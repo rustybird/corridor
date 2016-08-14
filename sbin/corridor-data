@@ -61,7 +61,9 @@ process_consensus() {
 
 		case "$1" in
 		DirAuthority)
+			IP=
 			ORPORT=
+
 			for s; do
 				case "$s" in
 				orport=*)
@@ -69,12 +71,16 @@ process_consensus() {
 				;;
 				*)
 					if loosely_ipv4_and_port "$s"; then
-						DIR_AUTHS="$DIR_AUTHS
-						           ${s%:*},$ORPORT"
-						break
+						IP=${s%:*}
 					fi
 				;;
 				esac
+
+				if test -n "$IP" -a -n "$ORPORT"; then
+					DIR_AUTHS="$DIR_AUTHS
+					           $IP,$ORPORT"
+					break
+				fi
 			done
 		;;
 
