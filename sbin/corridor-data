@@ -64,7 +64,9 @@ process_consensus() {
 			ORPORT=
 			for s; do
 				case "$s" in
-				orport=*) ORPORT=${s#*=} ;;
+				orport=*)
+					ORPORT=${s#*=}
+				;;
 				*)
 					if loosely_ipv4_and_port "$s"; then
 						DIR_AUTHS="$DIR_AUTHS
