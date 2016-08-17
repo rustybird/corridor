@@ -39,7 +39,7 @@ You can think of it as a fail-safe for your vanilla Tor Browser or Tails, for yo
 
 ## Installation
 
-*You may also be interested in Patrick Schleizer's [https://github.com/adrelanos/corridor](corridor Debian package), or the [https://www.whonix.org/wiki/Corridor](corridor page in the Whonix wiki)*
+*You may also be interested in Patrick Schleizer's [corridor Debian package](https://github.com/adrelanos/corridor), or the [corridor page in the Whonix wiki](https://www.whonix.org/wiki/Corridor)*
 
 ```
 # Install corridor and its systemd units to the default location in /usr/local.
