@@ -130,6 +130,7 @@ process_consensus() {
 
 
 . corridor-load-config
+set -f
 
 if test -n "$BRIDGES"; then
 	bridges
