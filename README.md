@@ -74,8 +74,8 @@ corridor-init-logged
 # If you use something other than systemd-networkd to bring up your
 # network interfaces (make sure that whatever it is correctly orders
 # itself after network-pre.target!), you must add a dependency:
-mkdir /etc/systemd/some.service.d
-cat  >/etc/systemd/some.service.d/corridor.conf <<END
+mkdir /etc/systemd/system/some.service.d
+cat  >/etc/systemd/system/some.service.d/corridor.conf <<END
 [Unit]
 Requires=corridor-init-forwarding.service
 END
