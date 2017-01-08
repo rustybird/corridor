@@ -26,7 +26,7 @@ install: man/corridor.8
 	for f in sbin/*; do ln -sf corridor.8 $(DESTDIR)$(MAN)/man8/$${f##*/}.8; done
 	install -m 644 corridor.d/* $(DESTDIR)/etc/corridor.d
 
-install-systemd: clean systemd-units
+install-systemd: systemd-units
 	install -d $(DESTDIR)$(SYSTEM)
 	install -m 644 $(UNITS) $(DESTDIR)$(SYSTEM)
 
