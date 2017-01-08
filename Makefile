@@ -11,6 +11,8 @@ UNITS = systemd/corridor-data.service \
 
 default: man/corridor.8
 
+all: man/corridor.8 systemd-units
+
 systemd-units: $(UNITS)
 
 %.service: %.service.in
