@@ -1,13 +1,13 @@
-PREFIX = /usr/local
-SBIN   = $(PREFIX)/sbin
-SYSTEM = $(PREFIX)/lib/systemd/system
-MAN    = $(PREFIX)/share/man
+PREFIX ?= /usr/local
+SBIN   ?= $(PREFIX)/sbin
+SYSTEM ?= $(PREFIX)/lib/systemd/system
+MAN    ?= $(PREFIX)/share/man
 
-UNITS = systemd/corridor-data.service \
-        systemd/corridor-init-forwarding.service \
-        systemd/corridor-init-logged.service \
-        systemd/corridor-init-snat.service \
-        systemd/corridor.target
+UNITS ?= systemd/corridor-data.service \
+         systemd/corridor-init-forwarding.service \
+         systemd/corridor-init-logged.service \
+         systemd/corridor-init-snat.service \
+         systemd/corridor.target
 
 default: man/corridor.8
 
