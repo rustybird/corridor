@@ -22,7 +22,7 @@ systemd-units: $(UNITS)
 	ronn -r $<
 
 install: man/corridor.8
-	install -d $(DESTDIR)$(SBIN) $(DESTDIR)$(MAN)/man8 $(DESTDIR)/etc/corridor.d $(DESTDIR)/var/lib/corridor $(DESTDIR)/usr/local/etc/corridor.d
+	install -d $(DESTDIR)$(SBIN) $(DESTDIR)$(MAN)/man8 $(DESTDIR)/etc/corridor.d $(DESTDIR)/var/lib/corridor
 	install sbin/* $(DESTDIR)$(SBIN)
 	install -m 644 man/corridor.8 $(DESTDIR)$(MAN)/man8
 	for f in sbin/*; do ln -sf corridor.8 $(DESTDIR)$(MAN)/man8/$${f##*/}.8; done
