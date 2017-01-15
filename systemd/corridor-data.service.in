@@ -1,5 +1,6 @@
 [Unit]
 Description=corridor's relay list
+Documentation=https://github.com/rustybird/corridor
 
 [Service]
 ExecStart=@SBIN@/corridor-data
