@@ -1,5 +1,6 @@
 [Unit]
 Description=corridor's logging
+Documentation=https://github.com/rustybird/corridor
 Requires=corridor-data.service
 After=corridor-data.service
 
