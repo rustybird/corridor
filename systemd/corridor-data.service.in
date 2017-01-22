@@ -1,5 +1,6 @@
 [Unit]
 Description=corridor's relay list
+Documentation=man:corridor(8)
 
 [Service]
 ExecStart=@SBIN@/corridor-data

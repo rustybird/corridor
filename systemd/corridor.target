@@ -1,5 +1,6 @@
 [Unit]
 Description=corridor, a Tor traffic whitelisting gateway
+Documentation=man:corridor(8)
 Wants=corridor-init-forwarding.service corridor-init-snat.service corridor-init-logged.service corridor-data.service
 After=corridor-init-forwarding.service corridor-init-snat.service corridor-init-logged.service corridor-data.service
 

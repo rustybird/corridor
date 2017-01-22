@@ -1,5 +1,6 @@
 [Unit]
 Description=corridor's forwarding
+Documentation=man:corridor(8)
 DefaultDependencies=no
 After=iptables.service systemd-sysctl.service
 Before=network-pre.target
