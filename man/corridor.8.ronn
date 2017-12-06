@@ -130,4 +130,4 @@ Tor Project.
 
 This man page has been written by Patrick Schleizer (adrelanos@riseup.net).
 
-corridor has been written by Rusty Bird (rustybird@openmailbox.org).
+corridor has been written by Rusty Bird (rustybird@net-c.com).
