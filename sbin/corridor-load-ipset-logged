@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
 grep '[^[:space:]]' |
-corridor-load-ipset "$@" "${0##*-}" hash:net hashsize 64
+corridor-load-ipset "$@" "${0##*-}" hash:net
