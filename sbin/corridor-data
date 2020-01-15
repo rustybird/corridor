@@ -108,14 +108,13 @@ process_consensus() {
 			case "$RELAYS" in ?*)
 				{
 					sed -e 's/^[[:space:]]*//' -e '/^$/d' |
-					sort -u |
-					tee -- "$RELAYS_STATE".tmp |
-					corridor-load-ipset-relays
+					sort -u >"$RELAYS_STATE".tmp
 				} <<-END
 					$HARDCODED_DIRS
 					$RELAYS
 				END
 
+				corridor-load-ipset-relays <"$RELAYS_STATE".tmp
 				mv -- "$RELAYS_STATE".tmp "$RELAYS_STATE"
 			esac
 		;;
