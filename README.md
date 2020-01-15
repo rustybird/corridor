@@ -99,7 +99,7 @@ make PREFIX=/usr install install-systemd install-qubes
 systemctl enable corridor.target
 
 # In dom0:
-qvm-create --proxy --template your-template --label blue corridor-gateway
+qvm-create --prop provides_network=True --template your-template --label blue corridor-gateway
 qvm-service --enable corridor-gateway corridor
 ```
 
