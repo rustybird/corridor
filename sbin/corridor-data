@@ -139,5 +139,8 @@ else
 		corridor-load-ipset-relays <"$RELAYS_STATE"
 	fi
 
-	receive_consensus | process_consensus
+	receive_consensus | {
+		trap "kill -s USR1 -- -$$" EXIT
+		process_consensus
+	}
 fi
