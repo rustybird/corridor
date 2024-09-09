@@ -42,7 +42,11 @@ receive_consensus() {
 	fi
 
 	while :; do
-		socat "$CTRL",crnl -,ignoreeof <<-END || :
+		# Pass a large 'total inactivity timeout' of 2^30 seconds
+		# (34 years) to work around a socat v1.8.0.1 bug (presumably
+		# fixed in the next release) where there is an immediate
+		# timeout in case of ignoreeof
+		socat -T 1073741824 "$CTRL",crnl -,ignoreeof <<-END || :
 			AUTHENTICATE `auth`
 			SETCONF DirPort="127.0.0.1:9030 NoAdvertise"
 			GETINFO config/defaults
