@@ -37,6 +37,8 @@ You can think of it as a fail-safe for your vanilla Tor Browser or Tails, for yo
 
 - You **probably should not use corridor in combination with other iptables-based firewalls** (like ufw): They can easily clobber some or all of corridor's rules. At the very least, start corridor-init-forwarding and corridor-init-snat *after* your other firewall, e.g. using systemd orderings.
 
+- If your [tor daemon crashes on starting corridor-data](https://github.com/rustybird/corridor/issues/51), update to tor 0.4.8.x or later.
+
 ## Installation
 
 *You may also be interested in Patrick Schleizer's [corridor Debian package](https://github.com/adrelanos/corridor), or the [corridor page in the Whonix wiki](https://www.whonix.org/wiki/Corridor)*
