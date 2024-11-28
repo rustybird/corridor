@@ -48,7 +48,7 @@ receive_consensus() {
 		# timeout in case of ignoreeof
 		socat -T 1073741824 "$CTRL",crnl -,ignoreeof <<-END || :
 			AUTHENTICATE `auth`
-			SETCONF DirPort="127.0.0.1:9030 NoAdvertise"
+			SETCONF DormantTimeoutEnabled=0
 			GETINFO config/defaults
 			GETINFO ns/all
 			SETEVENTS NEWCONSENSUS
