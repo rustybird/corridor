@@ -36,6 +36,8 @@ install-qubes:
 	install -d $(DESTDIR)/etc/corridor.d $(DESTDIR)$(SYSTEM)
 	install -m 644 qubes/corridor.d/* $(DESTDIR)/etc/corridor.d
 	umask 022 && cp -RP qubes/systemd/* $(DESTDIR)$(SYSTEM)
+	for d in corridor-data.service.d corridor-init-forwarding.service.d corridor-init-logged.service.d corridor-init-snat.service.d; do \
+	install -d $(DESTDIR)$(SYSTEM)/$$d/ && ln -sf ../corridor.target.d/qubes-service.conf $(DESTDIR)$(SYSTEM)/$$d/; done
 
 clean:
 	rm -f systemd/*.service
